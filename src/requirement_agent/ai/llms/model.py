@@ -1,24 +1,20 @@
 import os
 
-from langchain_core.prompts import SystemMessagePromptTemplate
 from langchain_openai import ChatOpenAI
 
 
-class AIProvider:
+class LLM:
     def __init__(self):
         self.api_key = os.getenv("DASHSCOPE_API_KEY")
         self.base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 
-    def get_model_name(self) -> str:
-        pass
-
-    def create_messages(self):
+    def get(self):
         model = ChatOpenAI(
-            model=self.get_model_name(),
+            model="qwen3-32b",
             api_key=self.api_key,
             base_url=self.base_url,
-            temperature=0,
             streaming=True,
+            temperature=0,
+            max_tokens=8000,
+            extra_body={"enable_thinking": True},
         )
-        system_template = SystemMessagePromptTemplate.from_template("")
-        pass
