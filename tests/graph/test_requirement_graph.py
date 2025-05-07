@@ -19,13 +19,13 @@ def test_stream(graph):
     )
     for event in events:
         LOG.info(event)
-        for value in event.values():
-            for message in value["messages"]:
-                for tool_call in message.tool_calls:
-                    if tool_call["name"] == "attempt_completion":
-                        args = tool_call["args"]
-                        LOG.info(f"result: {args['result']}")
-                    if tool_call["name"] == "ask_followup_question":
-                        args = tool_call["args"]
-                        LOG.info(f"question: {args['question']}")
-                        LOG.info(f"options: {args['options']}")
+        # for value in event.values():
+        #     for message in value["messages"]:
+        #         for tool_call in message.tool_calls:
+        #             if tool_call["name"] == "attempt_completion":
+        #                 args = tool_call["args"]
+        #                 LOG.info(f"result: {args['result']}")
+        #             if tool_call["name"] == "ask_followup_question":
+        #                 args = tool_call["args"]
+        #                 LOG.info(f"question: {args['question']}")
+        #                 LOG.info(f"options: {args['options']}")
