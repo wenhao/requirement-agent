@@ -1,6 +1,7 @@
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
+from requirement_agent.ai.agents.requirement_reflector.few_shot import examples
 from requirement_agent.ai.agents.requirement_reflector.tools import review
 from requirement_agent.ai.llms.model import llm
 from requirement_agent.ai.prompts.reflect_system import REFLECT_SYSTEM_PROMPT
@@ -9,16 +10,22 @@ from requirement_agent.ai.state.requirement_agent_state import RequirementAgentS
 
 def requirement_reflect(state: RequirementAgentState):
     llm_with_tools = llm.bind_tools([review])
-    prompt = ChatPromptTemplate.from_messages(
+    few_shot_prompt = ChatPromptTemplate.from_messages(
         [
             SystemMessage(content=REFLECT_SYSTEM_PROMPT),
+            *examples,
             MessagesPlaceholder(variable_name="messages"),
         ]
     )
-    reflect_chain = prompt | llm_with_tools
-    cls_map = {"ai": HumanMessage, "human": AIMessage}
-    translated = [state["messages"][0]] + [
-        cls_map[msg.type](content=msg.content) for msg in state["messages"][1:]
+    reflect_chain = few_shot_prompt | llm_with_tools
+    messages = [
+        HumanMessage(content=get_result(state))
     ]
-    message = reflect_chain.invoke(translated)
-    return {"messages": [message]}
+    reflect_message = reflect_chain.invoke(messages)
+    return {"messages": [reflect_message]}
+
+
+def get_result(state: RequirementAgentState):
+    ai_message = state["messages"][-1]
+    tool_call = ai_message.tool_calls[-1]
+    return tool_call["args"]["result"]
