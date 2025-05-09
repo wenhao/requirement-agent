@@ -13,7 +13,27 @@ def test_stream(graph):
     events = graph.stream(
         "招乎文档智能表格目前不能按单元格授予权限，要支持基于角色/用户组的单元格权限，需要设置不同单元格的编辑/查看权限。请按痛点、目标、改进思路、用户价值四个方面描述此需求，结果以表格形式呈现。",
         "test",
-        "values"
+        "updates"
+    )
+    for event in events:
+        LOG.info(event)
+
+
+def test_introduce_self(graph):
+    events = graph.stream(
+        "介绍你自己",
+        "test",
+        "updates"
+    )
+    for event in events:
+        LOG.info(event)
+
+
+def test_hello(graph):
+    events = graph.stream(
+        "你好",
+        "test",
+        "updates"
     )
     for event in events:
         LOG.info(event)
