@@ -1,10 +1,10 @@
 from langchain_core.messages import SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-from requirement_agent.ai.agents.requirement_generator.few_shot import examples
-from requirement_agent.ai.agents.requirement_generator.tools import ask_followup_question, attempt_completion
+from requirement_agent.ai.agents.generator.few_shot import examples
+from requirement_agent.ai.agents.generator.tools import ask_followup_question, attempt_completion
 from requirement_agent.ai.llms.model import llm
-from requirement_agent.ai.prompts.system import SYSTEM_PROMPT
+from requirement_agent.ai.prompts.generate_system import SYSTEM_PROMPT
 from requirement_agent.ai.state.requirement_agent_state import RequirementAgentState
 
 

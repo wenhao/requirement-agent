@@ -1,8 +1,8 @@
 from langchain_core.messages import HumanMessage
 from langgraph.graph import StateGraph, START, END
 
-from requirement_agent.ai.agents.requirement_generator.agent import requirement_generate
-from requirement_agent.ai.agents.requirement_reflector.agent import requirement_reflect
+from requirement_agent.ai.agents.generator.agent import requirement_generate
+from requirement_agent.ai.agents.reflector.agent import requirement_reflect
 from requirement_agent.ai.graph.condition import should_refection
 from requirement_agent.ai.memory.memory import checkpointer
 from requirement_agent.ai.state.requirement_agent_state import RequirementAgentState

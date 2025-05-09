@@ -1,8 +1,8 @@
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-from requirement_agent.ai.agents.requirement_reflector.few_shot import examples
-from requirement_agent.ai.agents.requirement_reflector.tools import review
+from requirement_agent.ai.agents.reflector.few_shot import examples
+from requirement_agent.ai.agents.reflector.tools import review
 from requirement_agent.ai.llms.model import llm
 from requirement_agent.ai.prompts.reflect_system import REFLECT_SYSTEM_PROMPT
 from requirement_agent.ai.state.requirement_agent_state import RequirementAgentState
