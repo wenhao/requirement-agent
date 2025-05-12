@@ -5,12 +5,12 @@ from langchain_openai import ChatOpenAI
 
 class LLM:
     def __init__(self):
-        self.api_key = os.getenv("DASHSCOPE_API_KEY")
-        self.base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+        self.api_key = os.getenv("SILICONCLOUD_API_KEY")
+        self.base_url = "https://api.siliconflow.cn/v1"
 
     def get(self):
         return ChatOpenAI(
-            model="qwen3-32b",
+            model="Qwen/Qwen3-235B-A22B",
             api_key=self.api_key,
             base_url=self.base_url,
             streaming=True,
@@ -22,5 +22,6 @@ class LLM:
                 "thinking_budget": 4096
             },
         )
+
 
 llm = LLM().get()
